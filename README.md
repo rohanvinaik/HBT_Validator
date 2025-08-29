@@ -1,44 +1,41 @@
-# HBT Paper - Hypervector Behavioral Trees for LLM Verification
+# HBT Validator - Hypervector Behavioral Trees for LLM Verification
 
 This repository contains the implementation of the HBT (Hypervector Behavioral Tree) validator for verifying Large Language Models using restriction enzyme verification (REV) techniques combined with hyperdimensional computing.
 
 ## 📁 Project Structure
 
 ```
-HBT_Paper/
-├── hbt_validator/                 # Main package directory
-│   ├── __init__.py               # Package initialization
-│   ├── core/                     # Core components
-│   │   ├── hbt_constructor.py    # Main HBT builder
-│   │   ├── hdc_encoder.py        # Hyperdimensional encoding
-│   │   ├── rev_executor.py       # REV memory-bounded execution
-│   │   ├── rev_executor_enhanced.py # Enhanced REV with Blake3
-│   │   └── variance_analyzer.py  # Variance pattern analysis
-│   ├── utils/                    # Utility modules
-│   │   ├── api_wrappers.py       # Model API interfaces
-│   │   ├── cryptography.py       # Merkle trees & commitments
-│   │   ├── hypervector_ops.py    # HDC operations
-│   │   └── perturbations.py      # Perturbation operators
-│   ├── verification/             # Verification components
-│   │   ├── fingerprint_matcher.py # Behavioral matching
-│   │   ├── structural_inference.py # Causal graph recovery
-│   │   └── zk_proofs.py          # Zero-knowledge proofs
-│   ├── challenges/               # Challenge generation
-│   │   ├── probe_generator.py    # Probe generation
-│   │   ├── datasets.py           # Probe datasets
-│   │   └── domains/              # Domain-specific probes
-│   ├── experiments/              # Experimental validation
-│   │   ├── validation.py         # Core experiments
-│   │   ├── ablations.py          # Ablation studies
-│   │   └── benchmarks.py         # Performance tests
-│   └── tests/                    # Unit tests
-│       ├── test_hbt_constructor.py
-│       └── test_hdc_encoder.py
-├── example_usage.py              # Usage examples
-├── requirements.txt              # Package dependencies
-├── setup.py                      # Package setup
-└── Shaking_the_Black_Box.md     # Paper draft
-
+HBT_Validator/                    # Repository root
+├── core/                         # Core components
+│   ├── hbt_constructor.py        # Main HBT builder
+│   ├── hdc_encoder.py           # Hyperdimensional encoding
+│   ├── rev_executor.py          # REV memory-bounded execution
+│   ├── rev_executor_enhanced.py # Enhanced REV with Blake3
+│   └── variance_analyzer.py     # Variance pattern analysis
+├── utils/                        # Utility modules
+│   ├── api_wrappers.py          # Model API interfaces
+│   ├── cryptography.py          # Merkle trees & commitments
+│   ├── hypervector_ops.py       # HDC operations
+│   └── perturbations.py         # Perturbation operators
+├── verification/                 # Verification components
+│   ├── fingerprint_matcher.py   # Behavioral matching
+│   ├── structural_inference.py  # Causal graph recovery
+│   └── zk_proofs.py             # Zero-knowledge proofs
+├── challenges/                   # Challenge generation
+│   ├── probe_generator.py       # Probe generation
+│   ├── datasets.py              # Probe datasets
+│   └── domains/                 # Domain-specific probes
+├── experiments/                  # Experimental validation
+│   ├── validation.py            # Core experiments
+│   ├── ablations.py             # Ablation studies
+│   └── benchmarks.py            # Performance tests
+├── tests/                       # Unit tests
+│   ├── test_hbt_constructor.py
+│   └── test_hdc_encoder.py
+├── example_usage.py             # Usage examples
+├── requirements.txt             # Package dependencies
+├── setup.py                     # Package setup
+└── Shaking_the_Black_Box.md    # Paper draft
 ```
 
 ## 🚀 Installation
@@ -46,25 +43,27 @@ HBT_Paper/
 ### Install from source:
 ```bash
 # Clone the repository
-git clone https://github.com/rohanvinaik/HBT_Paper.git
-cd HBT_Paper
+git clone https://github.com/rohanvinaik/HBT_Validator.git
+cd HBT_Validator
 
-# Install in development mode
-pip install -e .
-
-# Or install dependencies directly
+# Install dependencies
 pip install -r requirements.txt
+
+# For development
+pip install -e .
 ```
 
 ## 📖 Quick Start
 
 ```python
-from hbt_validator import (
-    HBTConstructor,
-    REVExecutorEnhanced,
-    ProbeGenerator,
-    FingerprintMatcher
-)
+import numpy as np
+import torch
+
+# Import components directly
+from core.hbt_constructor import HBTConstructor
+from core.rev_executor_enhanced import REVExecutorEnhanced
+from challenges.probe_generator import ProbeGenerator
+from verification.fingerprint_matcher import FingerprintMatcher
 
 # Create HBT constructor
 hbt_constructor = HBTConstructor()
@@ -96,24 +95,27 @@ See `example_usage.py` for complete examples.
 - **Merkle tree construction** from segment signatures
 - **Gradient checkpointing** and memory clearing for white-box mode
 - **Streaming execution** for models larger than RAM
+- **Configurable window size** (default 6) and stride (default 3)
 
 ### Hyperdimensional Computing
-- **10,000-dimensional vectors** with sparse encoding
+- **10,000-dimensional vectors** with sparse encoding (1% density)
 - **Multiple binding operations**: XOR, multiplication, circular convolution
 - **Error correction** with parity blocks
 - **Similarity metrics**: Cosine, Hamming, Euclidean
+- **Memory-efficient operations** with streaming support
 
 ### Behavioral Verification
-- **Fingerprint matching** with statistical tests
+- **Fingerprint matching** with statistical tests (KS test, Wasserstein distance)
 - **Variance analysis** for behavioral patterns
-- **Causal graph recovery** from time series
+- **Causal graph recovery** using Granger causality and transfer entropy
 - **Zero-knowledge proofs** for privacy-preserving verification
+- **Incremental fingerprinting** for online validation
 
 ### Challenge Generation
 - **Diverse probe types**: Factual, reasoning, creative, coding, math
 - **Adversarial probes** for robustness testing
-- **Domain-specific datasets**
-- **Configurable difficulty levels**
+- **Domain-specific datasets** (medical, legal, financial)
+- **Configurable difficulty levels** and perturbation strategies
 
 ## 🧪 Testing
 
@@ -122,26 +124,75 @@ See `example_usage.py` for complete examples.
 pytest
 
 # Run with coverage
-pytest --cov=hbt_validator
+pytest --cov=core --cov=utils --cov=verification
 
 # Run specific test file
-pytest hbt_validator/tests/test_hbt_constructor.py
+pytest tests/test_hbt_constructor.py
+
+# Run benchmarks
+python experiments/benchmarks.py
 ```
 
 ## 📊 Experiments
 
 The `experiments/` directory contains:
-- **Validation experiments**: Model pair comparison
-- **Ablation studies**: Component sensitivity analysis
-- **Performance benchmarks**: Speed and memory profiling
+
+### Validation Experiments
+```python
+from experiments.validation import ValidationExperiment
+
+validator = ValidationExperiment()
+result = validator.validate_model_pair(model1_config, model2_config)
+```
+
+### Ablation Studies
+```python
+from experiments.ablations import AblationStudy
+
+ablation = AblationStudy()
+results = ablation.run_full_ablation(model_config)
+```
+
+### Performance Benchmarks
+```python
+from experiments.benchmarks import PerformanceBenchmark
+
+benchmark = PerformanceBenchmark()
+results = benchmark.run_full_benchmark()
+```
+
+## 🔬 Advanced Features
+
+### Enhanced REV Executor
+- Blake3 cryptographic hashing for speed
+- Segment caching and offloading
+- Merkle proof verification
+- Memory monitoring and management
+
+### Zero-Knowledge Proofs
+- Schnorr proofs for discrete logarithm
+- Range proofs for bounded values
+- Vector distance proofs
+- Set membership proofs
+
+### Hypervector Operations
+- Sparse encoding for memory efficiency
+- Hardware-accelerated operations
+- Clustering and compression
+- Associative memory
 
 ## 📝 Paper
 
-See `Shaking_the_Black_Box.md` for the paper draft discussing the theoretical foundations and methodology.
+See `Shaking_the_Black_Box.md` for the theoretical foundations and methodology behind HBT validation.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit issues or pull requests.
+Contributions are welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Ensure all tests pass
+5. Submit a pull request
 
 ## 📄 License
 
@@ -151,6 +202,14 @@ This project is licensed under the MIT License.
 
 For questions or collaboration, please open an issue on GitHub.
 
+## 🙏 Acknowledgments
+
+This work builds on research in:
+- Hyperdimensional computing
+- Model verification
+- Cryptographic commitments
+- Statistical testing
+
 ---
 
-**Repository**: https://github.com/rohanvinaik/HBT_Paper
+**Repository**: https://github.com/rohanvinaik/HBT_Validator

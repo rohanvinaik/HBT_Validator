@@ -2,14 +2,11 @@
 
 import numpy as np
 import torch
-from hbt_validator import (
-    HBTConstructor,
-    REVExecutorEnhanced,
-    ProbeGenerator,
-    FingerprintMatcher,
-    BehavioralFingerprint,
-    ValidationExperiment
-)
+from core.hbt_constructor import HBTConstructor
+from core.rev_executor_enhanced import REVExecutorEnhanced
+from challenges.probe_generator import ProbeGenerator
+from verification.fingerprint_matcher import FingerprintMatcher, BehavioralFingerprint
+from experiments.validation import ValidationExperiment
 
 def example_basic_hbt():
     """Basic HBT construction example."""

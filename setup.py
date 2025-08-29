@@ -18,8 +18,8 @@ setup(
     description="Hypervector Behavioral Tree Validator for LLM Verification",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/rohanvinaik/HBT_Paper",
-    packages=find_packages(),
+    url="https://github.com/rohanvinaik/HBT_Validator",
+    packages=find_packages(include=['core*', 'utils*', 'verification*', 'challenges*', 'experiments*', 'tests*']),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",
@@ -47,13 +47,8 @@ setup(
             "plotly>=5.0.0",
         ],
     },
-    entry_points={
-        "console_scripts": [
-            "hbt-validate=hbt_validator.cli:main",
-        ],
-    },
     include_package_data=True,
     package_data={
-        "hbt_validator": ["*.json", "*.yaml"],
+        "": ["*.json", "*.yaml"],
     },
 )
