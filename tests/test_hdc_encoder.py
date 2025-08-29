@@ -34,7 +34,7 @@ class TestHyperdimensionalEncoderBasic:
         probe = {"text": "test prompt", "features": {"complexity": 0.5}}
         hv = hdc_encoder.probe_to_hypervector(probe)
         
-        assert_hypervector_properties(hv, hdc_encoder.dimension)
+        assert_hypervector_properties(hv, hdc_encoder.config.dimension)
     
     def test_binary_hypervector_values(self, hdc_encoder):
         """Test hypervector contains only binary values."""
@@ -84,7 +84,7 @@ class TestResponseEncoding:
         """Test basic response encoding."""
         response_hv = hdc_encoder.response_to_hypervector(sample_response)
         
-        assert_hypervector_properties(response_hv, hdc_encoder.dimension)
+        assert_hypervector_properties(response_hv, hdc_encoder.config.dimension)
     
     def test_top_k_token_encoding(self, hdc_encoder):
         """Test top-k token encoding."""
@@ -102,8 +102,8 @@ class TestResponseEncoding:
         assert not np.array_equal(hv_k3, hv_k5)
         
         # Both should be valid hypervectors
-        assert_hypervector_properties(hv_k3, hdc_encoder.dimension)
-        assert_hypervector_properties(hv_k5, hdc_encoder.dimension)
+        assert_hypervector_properties(hv_k3, hdc_encoder.config.dimension)
+        assert_hypervector_properties(hv_k5, hdc_encoder.config.dimension)
     
     def test_positional_information(self, hdc_encoder):
         """Test positional information encoding."""
@@ -185,31 +185,31 @@ class TestSimilarityComputation:
     def test_similarity_bounds(self, hdc_encoder):
         """Test similarity is always in [0, 1]."""
         # Generate random hypervectors
-        hv1 = np.random.choice([-1, 1], size=hdc_encoder.dimension).astype(np.int8)
-        hv2 = np.random.choice([-1, 1], size=hdc_encoder.dimension).astype(np.int8)
+        hv1 = np.random.choice([-1, 1], size=hdc_encoder.config.dimension).astype(np.int8)
+        hv2 = np.random.choice([-1, 1], size=hdc_encoder.config.dimension).astype(np.int8)
         
         similarity = hdc_encoder.compute_similarity(hv1, hv2)
         assert_similarity_bounds(similarity)
     
     def test_identical_vectors_similarity(self, hdc_encoder):
         """Test identical vectors have similarity 1.0."""
-        hv = np.random.choice([-1, 1], size=hdc_encoder.dimension).astype(np.int8)
+        hv = np.random.choice([-1, 1], size=hdc_encoder.config.dimension).astype(np.int8)
         
         similarity = hdc_encoder.compute_similarity(hv, hv)
         np.testing.assert_almost_equal(similarity, 1.0, decimal=10)
     
     def test_opposite_vectors_similarity(self, hdc_encoder):
         """Test opposite vectors have similarity 0.0."""
-        hv1 = np.ones(hdc_encoder.dimension, dtype=np.int8)
-        hv2 = -np.ones(hdc_encoder.dimension, dtype=np.int8)
+        hv1 = np.ones(hdc_encoder.config.dimension, dtype=np.int8)
+        hv2 = -np.ones(hdc_encoder.config.dimension, dtype=np.int8)
         
         similarity = hdc_encoder.compute_similarity(hv1, hv2)
         np.testing.assert_almost_equal(similarity, 0.0, decimal=10)
     
     def test_similarity_symmetry(self, hdc_encoder):
         """Test similarity is symmetric."""
-        hv1 = np.random.choice([-1, 1], size=hdc_encoder.dimension).astype(np.int8)
-        hv2 = np.random.choice([-1, 1], size=hdc_encoder.dimension).astype(np.int8)
+        hv1 = np.random.choice([-1, 1], size=hdc_encoder.config.dimension).astype(np.int8)
+        hv2 = np.random.choice([-1, 1], size=hdc_encoder.config.dimension).astype(np.int8)
         
         sim12 = hdc_encoder.compute_similarity(hv1, hv2)
         sim21 = hdc_encoder.compute_similarity(hv2, hv1)
@@ -299,8 +299,8 @@ class TestHyperdimensionalEncoderIntegration:
         response_hv = hdc_encoder.response_to_hypervector(sample_response)
         
         # Both should be valid
-        assert_hypervector_properties(probe_hv, hdc_encoder.dimension)
-        assert_hypervector_properties(response_hv, hdc_encoder.dimension)
+        assert_hypervector_properties(probe_hv, hdc_encoder.config.dimension)
+        assert_hypervector_properties(response_hv, hdc_encoder.config.dimension)
         
         # Compute similarity
         similarity = hdc_encoder.compute_similarity(probe_hv, response_hv)
@@ -320,7 +320,7 @@ class TestHyperdimensionalEncoderIntegration:
         
         # All should be valid
         for hv in hypervectors:
-            assert_hypervector_properties(hv, hdc_encoder.dimension)
+            assert_hypervector_properties(hv, hdc_encoder.config.dimension)
         
         # Should all be different
         for i in range(len(hypervectors)):
@@ -334,7 +334,7 @@ class TestHyperdimensionalEncoderIntegration:
         
         # Should not crash
         hv = hdc_encoder.probe_to_hypervector(minimal_probe)
-        assert_hypervector_properties(hv, hdc_encoder.dimension)
+        assert_hypervector_properties(hv, hdc_encoder.config.dimension)
     
     def test_encoding_performance(self, large_hdc_encoder):
         """Test encoding performance with large dimension."""
@@ -353,7 +353,7 @@ class TestHyperdimensionalEncoderIntegration:
         
         # Should be fast (< 100ms for 16K dimension)
         assert encoding_time_ms < 100
-        assert_hypervector_properties(hv, large_hdc_encoder.dimension)
+        assert_hypervector_properties(hv, large_hdc_encoder.config.dimension)
 
 
 @pytest.mark.skipif(not hypothesis_available, reason="Hypothesis not available")
@@ -404,7 +404,7 @@ class TestHyperdimensionalEncoderEdgeCases:
         
         # Should not crash
         hv = hdc_encoder.probe_to_hypervector(empty_probe)
-        assert_hypervector_properties(hv, hdc_encoder.dimension)
+        assert_hypervector_properties(hv, hdc_encoder.config.dimension)
     
     def test_very_long_text_probe(self, hdc_encoder):
         """Test encoder handles very long text."""
@@ -412,7 +412,7 @@ class TestHyperdimensionalEncoderEdgeCases:
         long_probe = {"text": long_text, "features": {}}
         
         hv = hdc_encoder.probe_to_hypervector(long_probe)
-        assert_hypervector_properties(hv, hdc_encoder.dimension)
+        assert_hypervector_properties(hv, hdc_encoder.config.dimension)
     
     def test_unicode_text_probe(self, hdc_encoder):
         """Test encoder handles Unicode text."""
@@ -422,7 +422,7 @@ class TestHyperdimensionalEncoderEdgeCases:
         }
         
         hv = hdc_encoder.probe_to_hypervector(unicode_probe)
-        assert_hypervector_properties(hv, hdc_encoder.dimension)
+        assert_hypervector_properties(hv, hdc_encoder.config.dimension)
     
     def test_invalid_logprobs(self, hdc_encoder):
         """Test encoder handles invalid logprobs."""
@@ -434,7 +434,7 @@ class TestHyperdimensionalEncoderEdgeCases:
         
         # Should handle gracefully (no crash)
         hv = hdc_encoder.response_to_hypervector(invalid_response)
-        assert_hypervector_properties(hv, hdc_encoder.dimension)
+        assert_hypervector_properties(hv, hdc_encoder.config.dimension)
     
     def test_mismatched_tokens_logprobs(self, hdc_encoder):
         """Test encoder handles mismatched tokens and logprobs."""
@@ -446,7 +446,7 @@ class TestHyperdimensionalEncoderEdgeCases:
         
         # Should handle gracefully
         hv = hdc_encoder.response_to_hypervector(mismatched_response)
-        assert_hypervector_properties(hv, hdc_encoder.dimension)
+        assert_hypervector_properties(hv, hdc_encoder.config.dimension)
     
     def test_dimension_validation(self):
         """Test dimension validation."""

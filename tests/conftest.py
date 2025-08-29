@@ -55,13 +55,21 @@ def temp_dir():
 @pytest.fixture
 def hdc_encoder():
     """Standard HDC encoder for testing."""
-    return HyperdimensionalEncoder(dimension=1024, seed=42)
+    from core.hdc_encoder import HDCConfig
+    config = HDCConfig()
+    config.dimension = 1024
+    config.seed = 42
+    return HyperdimensionalEncoder(config)
 
 
 @pytest.fixture
 def large_hdc_encoder():
     """Large HDC encoder for scalability tests."""
-    return HyperdimensionalEncoder(dimension=16384, seed=42)
+    from core.hdc_encoder import HDCConfig
+    config = HDCConfig()
+    config.dimension = 16384
+    config.seed = 42
+    return HyperdimensionalEncoder(config)
 
 
 @pytest.fixture

@@ -11,37 +11,42 @@ A revolutionary approach to LLM verification that achieves 95.8% accuracy using 
 ## 📁 Project Structure
 
 ```
-HBT_Validator/                    # Repository root
-├── core/                         # Core components
-│   ├── hbt_constructor.py        # Main HBT builder
+HBT_Paper/                        # Repository root
+├── core/                         # Core HBT system components
+│   ├── __init__.py              # Main module exports
+│   ├── hbt_builder.py           # HBT construction & management
+│   ├── probe_generator.py       # Challenge/probe generation
 │   ├── hdc_encoder.py           # Hyperdimensional encoding
 │   ├── rev_executor.py          # REV memory-bounded execution
-│   ├── rev_executor_enhanced.py # Enhanced REV with Blake3
+│   ├── statistical_validator.py # Mathematical guarantees
+│   ├── application_workflows.py # Advanced application workflows
+│   ├── security_analysis.py     # Security & zero-knowledge proofs
+│   ├── experimental_validation.py # Benchmarking & validation
 │   └── variance_analyzer.py     # Variance pattern analysis
-├── utils/                        # Utility modules
-│   ├── api_wrappers.py          # Model API interfaces
-│   ├── cryptography.py          # Merkle trees & commitments
-│   ├── hypervector_ops.py       # HDC operations
-│   └── perturbations.py         # Perturbation operators
-├── verification/                 # Verification components
-│   ├── fingerprint_matcher.py   # Behavioral matching
-│   ├── structural_inference.py  # Causal graph recovery
-│   └── zk_proofs.py             # Zero-knowledge proofs
-├── challenges/                   # Challenge generation
-│   ├── probe_generator.py       # Probe generation
-│   ├── datasets.py              # Probe datasets
-│   └── domains/                 # Domain-specific probes
-├── experiments/                  # Experimental validation
-│   ├── validation.py            # Core experiments
-│   ├── ablations.py             # Ablation studies
-│   └── benchmarks.py            # Performance tests
-├── tests/                       # Unit tests
-│   ├── test_hbt_constructor.py
-│   └── test_hdc_encoder.py
-├── example_usage.py             # Usage examples
+├── examples/                     # Usage examples & demos
+│   ├── basic_verification.py    # Basic model verification
+│   ├── api_audit.py             # Commercial model auditing
+│   └── advanced_workflows.py    # Advanced feature examples
+├── notebooks/                    # Interactive demonstrations
+│   └── hbt_visualization_demo.ipynb # HBT concepts visualization
+├── config/                       # Configuration templates
+│   ├── quick.yaml              # Rapid prototyping config
+│   ├── standard.yaml           # Production configuration
+│   ├── research.yaml           # High-accuracy research config
+│   └── api_audit.yaml          # Commercial auditing config
+├── tests/                        # Comprehensive test suite
+│   ├── __init__.py
+│   ├── conftest.py             # Test configuration
+│   ├── test_hbt_builder.py     # HBT construction tests
+│   ├── test_statistical_validator.py # Statistical validation tests
+│   ├── test_application_workflows.py # Workflow tests
+│   ├── test_security_analysis.py # Security & ZK proof tests
+│   └── test_experimental_validation.py # Validation suite tests
+├── experimental_results/         # Benchmark results storage
 ├── requirements.txt             # Package dependencies
-├── setup.py                     # Package setup
-└── Shaking_the_Black_Box.md    # Paper draft
+├── setup.py                     # Package installation
+├── pytest.ini                   # Test configuration
+└── Shaking_the_Black_Box.md    # Complete paper draft
 ```
 
 ## 🚀 Installation
@@ -61,40 +66,51 @@ pip install -e .
 
 ## 📖 Quick Start
 
+### Basic Model Verification
 ```python
-import numpy as np
-import torch
+from core import create_hbt_system
 
-# Import components directly
-from core.hbt_constructor import HBTConstructor
-from core.rev_executor_enhanced import REVExecutorEnhanced
-from challenges.probe_generator import ProbeGenerator
-from verification.fingerprint_matcher import FingerprintMatcher
+# Create complete HBT system
+hbt_system = create_hbt_system()
 
-# Create HBT constructor
-hbt_constructor = HBTConstructor()
+# Basic model verification
+model_id = "gpt-4-turbo"
+verification_claims = ["accuracy > 0.9", "safety_score > 0.8"]
 
-# Generate probes
-probe_gen = ProbeGenerator()
-probes = probe_gen.generate_batch(num_probes=100)
+# Run verification
+results = hbt_system["privacy_system"].privacy_preserving_verification(
+    model_identifier=model_id,
+    verification_claims=verification_claims,
+    privacy_budget=1.0
+)
 
-# Build HBT for a model
-hbt = hbt_constructor.build_hbt(model, probes, "model_name")
+print(f"Verification successful: {results['overall_verification']}")
+```
 
-# Use REV executor for memory-bounded execution
-rev_executor = REVExecutorEnhanced()
-result = rev_executor.rev_execute_whitebox(
-    model=pytorch_model,
-    input_data=input_tensor,
-    window_size=6,
-    stride=3
+### Advanced Workflows
+```python
+# Capability discovery
+capabilities = hbt_system["workflow_manager"].capability_discovery.discover_capabilities(
+    model_identifier=model_id
+)
+
+# Security assessment  
+security_assessment = hbt_system["security_analyzer"].comprehensive_security_assessment(
+    model_identifier=model_id
+)
+
+# Experimental validation
+benchmark_results = hbt_system["experimental_validator"].run_benchmark_suite(
+    suite_name="comprehensive_validation",
+    benchmark_configs=[config_accuracy, config_security, config_privacy]
 )
 ```
 
-See `example_usage.py` for complete examples.
+See `examples/` directory for complete usage examples and `notebooks/` for interactive demonstrations.
 
 ## 🔥 Key Features
 
+### Core Verification Capabilities
 - **🎯 Pure Black-Box Operation**: 95.8% accuracy with API-only access (no weights required)
 - **⚡ Memory-Bounded Execution**: REV (Restriction Enzyme Verification) for scalable analysis
 - **🧠 Hyperdimensional Fingerprints**: 16K-100K dimensional behavioral signatures
@@ -102,6 +118,27 @@ See `example_usage.py` for complete examples.
 - **🔒 Zero-Knowledge Proofs**: Cryptographically secure model verification
 - **💰 Cost-Effective**: ~$2-5 per model audit using efficient API sampling
 - **🚀 Sub-Linear Scaling**: O(√n) complexity for model parameter count n
+
+### Advanced Application Workflows
+- **🔍 Capability Discovery**: Automated detection and profiling of model capabilities
+- **⚖️ Alignment Measurement**: Multi-dimensional alignment assessment (helpfulness, harmlessness, honesty)
+- **🛡️ Adversarial Detection**: Advanced detection of prompt injection, jailbreaking, and manipulation
+- **📈 Scalability Analysis**: Performance characterization across dataset sizes
+- **🧪 Statistical Validation**: Rigorous mathematical guarantees with confidence bounds
+
+### Security & Privacy Features
+- **🔐 Comprehensive Security Analysis**: Detection of 8 major threat categories
+- **🕵️ Privacy-Preserving Verification**: Differential privacy with ε-δ guarantees
+- **🗝️ Zero-Knowledge Protocols**: Schnorr, PLONK, and custom HBT proof systems
+- **🚨 Threat Assessment**: Automated vulnerability scoring and mitigation strategies
+- **🎯 Attack Simulation**: Model extraction, membership inference, and backdoor detection
+
+### Experimental & Validation Suite
+- **📊 Comprehensive Benchmarking**: 7 benchmark types with statistical significance testing
+- **🧬 Synthetic Data Generation**: Realistic model and verification claim datasets
+- **⚡ Performance Monitoring**: Detailed execution time and memory usage tracking
+- **📈 Scalability Testing**: Automated analysis across different dataset sizes
+- **📋 Detailed Reporting**: Comprehensive results with confidence intervals and recommendations
 
 ## 📈 Validation Results
 

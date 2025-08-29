@@ -506,12 +506,18 @@ class VarianceAnalyzer:
         # Compute correlation
         if self.config.use_robust_stats:
             # Use Spearman correlation for robustness
-            correlation, _ = stats.spearmanr(response1, response2)
+            if np.std(response1) == 0 or np.std(response2) == 0:
+                correlation = 0.0
+            else:
+                correlation, _ = stats.spearmanr(response1, response2)
         else:
             # Use Pearson correlation
-            correlation, _ = stats.pearsonr(response1, response2)
+            if np.std(response1) == 0 or np.std(response2) == 0:
+                correlation = 0.0
+            else:
+                correlation, _ = stats.pearsonr(response1, response2)
         
-        return float(correlation)
+        return float(correlation if not np.isnan(correlation) else 0.0)
     
     def infer_causal_structure(
         self,
@@ -826,7 +832,8 @@ def compute_drift_score(
         flat2 = flat2 / np.sum(flat2)
         
         # Compute KL divergence
-        return np.sum(flat1 * np.log(flat1 / flat2))
+        kl_div = np.sum(flat1 * np.log(flat1 / flat2))
+        return float(kl_div)
     
     elif method == 'wasserstein':
         from scipy.stats import wasserstein_distance
@@ -867,7 +874,8 @@ def analyze_structural_stability(
             drift_matrix[j, i] = drift
     
     # Compute stability metrics
-    mean_drift = np.mean(drift_matrix[drift_matrix > 0])
+    non_zero_drifts = drift_matrix[drift_matrix > 0]
+    mean_drift = np.mean(non_zero_drifts) if len(non_zero_drifts) > 0 else 0.0
     max_drift = np.max(drift_matrix)
     
     # Find most stable and unstable pairs
