@@ -3,7 +3,7 @@
 __version__ = "0.1.0"
 
 # Core components
-from core.hbt_constructor import HBTConstructor, HBTConfig
+from core.hbt_constructor import HolographicBehavioralTwin, HBTConfig
 from core.hdc_encoder import HyperdimensionalEncoder, HDCConfig
 from core.variance_analyzer import VarianceAnalyzer, VarianceConfig
 from core.rev_executor import REVExecutor, SegmentConfig
@@ -73,26 +73,26 @@ from verification.zk_proofs import (
 )
 
 # Challenges
-from challenges.probe_generator import ProbeGenerator, ProbeConfig
-from challenges.datasets import (
-    ProbeDataset,
-    StandardProbeDataset,
-    AdversarialProbeDataset,
-    DomainSpecificDataset,
-    DatasetManager
-)
+from challenges.probe_generator import ProbeGenerator, Challenge
+# from challenges.datasets import (
+#     ProbeDataset,
+#     StandardProbeDataset,
+#     AdversarialProbeDataset,
+#     DomainSpecificDataset,
+#     DatasetManager
+# )
 
 # Experiments
-from experiments.validation import ValidationExperiment, BatchValidation
-from experiments.ablations import AblationStudy
-from experiments.benchmarks import PerformanceBenchmark
+# from experiments.validation import ValidationExperiment, BatchValidation
+# from experiments.ablations import AblationStudy
+# from experiments.benchmarks import PerformanceBenchmark
 
 __all__ = [
     # Version
     "__version__",
     
     # Core
-    "HBTConstructor",
+    "HolographicBehavioralTwin",
     "HBTConfig",
     "HyperdimensionalEncoder",
     "HDCConfig",
@@ -157,16 +157,16 @@ __all__ = [
     
     # Challenges
     "ProbeGenerator",
-    "ProbeConfig",
-    "ProbeDataset",
-    "StandardProbeDataset",
-    "AdversarialProbeDataset",
-    "DomainSpecificDataset",
-    "DatasetManager",
+    "Challenge",
+    # "ProbeDataset",
+    # "StandardProbeDataset",
+    # "AdversarialProbeDataset",
+    # "DomainSpecificDataset",
+    # "DatasetManager",
     
     # Experiments
-    "ValidationExperiment",
-    "BatchValidation",
-    "AblationStudy",
-    "PerformanceBenchmark",
+    # "ValidationExperiment",
+    # "BatchValidation",
+    # "AblationStudy",
+    # "PerformanceBenchmark",
 ]
