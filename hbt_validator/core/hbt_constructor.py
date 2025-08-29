@@ -7,9 +7,9 @@ from dataclasses import dataclass
 import logging
 import json
 
-from .rev_executor import REVExecutor, SegmentConfig
-from .hdc_encoder import HyperdimensionalEncoder, HDCConfig
-from .variance_analyzer import VarianceAnalyzer, VarianceConfig
+from hbt_validator.core.rev_executor import REVExecutor, SegmentConfig
+from hbt_validator.core.hdc_encoder import HyperdimensionalEncoder, HDCConfig
+from hbt_validator.core.variance_analyzer import VarianceAnalyzer, VarianceConfig
 
 logger = logging.getLogger(__name__)
 

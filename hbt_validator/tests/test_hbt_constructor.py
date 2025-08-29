@@ -4,8 +4,8 @@ import pytest
 import numpy as np
 from unittest.mock import Mock, patch
 
-from ..core.hbt_constructor import HBTConstructor, HBTConfig
-from ..challenges.probe_generator import ProbeGenerator
+from hbt_validator.core.hbt_constructor import HBTConstructor, HBTConfig
+from hbt_validator.challenges.probe_generator import ProbeGenerator
 
 
 class TestHBTConstructor:

@@ -7,9 +7,9 @@ from typing import Dict, List, Any, Optional
 import logging
 from pathlib import Path
 
-from ..core.hbt_constructor import HBTConstructor
-from ..utils.hypervector_ops import HypervectorOperations, SimilarityMetrics
-from ..challenges.probe_generator import ProbeGenerator
+from hbt_validator.core.hbt_constructor import HBTConstructor
+from hbt_validator.utils.hypervector_ops import HypervectorOperations, SimilarityMetrics
+from hbt_validator.challenges.probe_generator import ProbeGenerator
 
 logger = logging.getLogger(__name__)
 

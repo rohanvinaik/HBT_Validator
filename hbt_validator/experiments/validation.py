@@ -6,10 +6,10 @@ import time
 import logging
 from pathlib import Path
 
-from ..core.hbt_constructor import HBTConstructor
-from ..challenges.probe_generator import ProbeGenerator
-from ..verification.fingerprint_matcher import FingerprintMatcher, BehavioralFingerprint
-from ..utils.api_wrappers import ModelAPIFactory
+from hbt_validator.core.hbt_constructor import HBTConstructor
+from hbt_validator.challenges.probe_generator import ProbeGenerator
+from hbt_validator.verification.fingerprint_matcher import FingerprintMatcher, BehavioralFingerprint
+from hbt_validator.utils.api_wrappers import ModelAPIFactory
 
 logger = logging.getLogger(__name__)
 

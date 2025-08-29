@@ -5,11 +5,11 @@ from typing import Dict, List, Any, Optional
 import logging
 from pathlib import Path
 
-from ..core.hbt_constructor import HBTConstructor, HBTConfig
-from ..core.hdc_encoder import HDCConfig
-from ..core.variance_analyzer import VarianceConfig
-from ..challenges.probe_generator import ProbeGenerator
-from ..utils.api_wrappers import ModelAPIFactory
+from hbt_validator.core.hbt_constructor import HBTConstructor, HBTConfig
+from hbt_validator.core.hdc_encoder import HDCConfig
+from hbt_validator.core.variance_analyzer import VarianceConfig
+from hbt_validator.challenges.probe_generator import ProbeGenerator
+from hbt_validator.utils.api_wrappers import ModelAPIFactory
 
 logger = logging.getLogger(__name__)
 

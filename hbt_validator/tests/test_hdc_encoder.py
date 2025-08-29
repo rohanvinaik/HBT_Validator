@@ -3,7 +3,7 @@
 import pytest
 import numpy as np
 
-from ..core.hdc_encoder import HyperdimensionalEncoder, HDCConfig
+from hbt_validator.core.hdc_encoder import HyperdimensionalEncoder, HDCConfig
 
 
 class TestHyperdimensionalEncoder:
