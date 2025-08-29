@@ -244,7 +244,77 @@ class HyperdimensionalEncoder:
         site_config: Dict[str, Any]
     ) -> np.ndarray:
         """
-        Build behavioral site hypervector from model outputs (black-box).
+        Build behavioral site hypervector from model outputs (black-box mode).
+        
+        Constructs a hyperdimensional representation of model behavior by encoding
+        various output characteristics such as response patterns, token distributions,
+        and behavioral signatures. This method is optimized for black-box analysis
+        where only model outputs (not internal states) are available.
+        
+        Parameters
+        ----------
+        model_outputs : dict
+            Dictionary containing model output information with keys:
+            - 'text' : str
+                Generated text response from the model
+            - 'logprobs' : list of dict, optional
+                Token-level log probabilities if available
+            - 'tokens' : list of str, optional
+                Tokenized representation of the response
+            - 'metadata' : dict, optional
+                Additional metadata about the generation process
+                
+        site_config : dict
+            Configuration for behavioral site construction with keys:
+            - 'complexity_weight' : float, default 0.3
+                Weight for complexity-based encoding
+            - 'diversity_weight' : float, default 0.2
+                Weight for lexical diversity encoding
+            - 'coherence_weight' : float, default 0.3
+                Weight for coherence-based encoding
+            - 'style_weight' : float, default 0.2
+                Weight for stylistic pattern encoding
+            - 'enable_multi_scale' : bool, default True
+                Whether to use multi-scale encoding
+                
+        Returns
+        -------
+        np.ndarray
+            Hyperdimensional vector of shape (dimension,) representing the
+            behavioral signature of the model outputs. Vector is normalized
+            and optionally binarized based on configuration.
+            
+        Examples
+        --------
+        >>> encoder = HyperdimensionalEncoder()
+        >>> outputs = {
+        ...     'text': 'The quantum computer uses superposition...',
+        ...     'logprobs': [{'token': 'The', 'logprob': -0.1}, ...],
+        ...     'tokens': ['The', 'quantum', 'computer', ...]
+        ... }
+        >>> config = {'complexity_weight': 0.4, 'diversity_weight': 0.3}
+        >>> signature = encoder.build_behavioral_site(outputs, config)
+        >>> signature.shape
+        (16384,)
+        
+        Notes
+        -----
+        The behavioral site encoding follows a multi-stage process:
+        1. Text analysis for complexity, diversity, and coherence metrics
+        2. Token-level probability encoding (if available)
+        3. Stylistic pattern recognition
+        4. Multi-scale hierarchical encoding
+        5. Final bundling and normalization
+        
+        The resulting hypervector captures high-level behavioral patterns
+        that are invariant to surface-level variations but sensitive to
+        fundamental model characteristics.
+        
+        See Also
+        --------
+        probe_to_hypervector : Encode input probes
+        response_to_hypervector : Encode detailed responses with logits
+        compute_similarity : Compare behavioral signatures
         
         Args:
             model_outputs: Dictionary containing response distributions, no weights needed

@@ -26,10 +26,10 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent))
 
 from core.hbt_constructor import HolographicBehavioralTwin
-from core.vmci import VarianceMediatedCausalInference
+from core.variance_analyzer import VarianceAnalyzer
 from verification.fingerprint_matcher import FingerprintMatcher
 from challenges.probe_generator import (
-    ChallengeGenerator,
+    ProbeGenerator,
     Challenge,
     AdaptiveProbeSelector
 )
@@ -1231,13 +1231,13 @@ def load_model_from_endpoint(endpoint: str) -> Any:
 
 def generate_verification_challenges(n: int = 256) -> List[Challenge]:
     """Generate challenges for verification."""
-    generator = ChallengeGenerator()
+    generator = ProbeGenerator()
     return [generator.generate_probe() for _ in range(n)]
 
 
 def generate_alignment_challenges(n: int = 256) -> List[Challenge]:
     """Generate challenges for alignment measurement."""
-    generator = ChallengeGenerator()
+    generator = ProbeGenerator()
     challenges = []
     
     for _ in range(n // 2):
@@ -1257,7 +1257,7 @@ def generate_alignment_challenges(n: int = 256) -> List[Challenge]:
 
 def generate_adversarial_detection_challenges(n: int = 256) -> List[Challenge]:
     """Generate challenges for adversarial detection."""
-    generator = ChallengeGenerator()
+    generator = ProbeGenerator()
     challenges = []
     
     for _ in range(n):
@@ -1271,7 +1271,7 @@ def generate_adversarial_detection_challenges(n: int = 256) -> List[Challenge]:
 
 def generate_capability_probes(n: int = 256) -> List[Challenge]:
     """Generate probes for capability discovery."""
-    generator = ChallengeGenerator()
+    generator = ProbeGenerator()
     challenges = []
     
     capabilities = ['math', 'code', 'language', 'reasoning', 'creativity']
@@ -1286,7 +1286,7 @@ def generate_capability_probes(n: int = 256) -> List[Challenge]:
 
 def generate_audit_challenges(n: int = 256) -> List[Challenge]:
     """Generate challenges for model auditing."""
-    generator = ChallengeGenerator()
+    generator = ProbeGenerator()
     challenges = []
     
     for _ in range(n):
@@ -1336,7 +1336,7 @@ def create_discovery_policies() -> Dict[str, Any]:
 
 def load_safety_probes() -> List[Challenge]:
     """Load safety-specific probes."""
-    generator = ChallengeGenerator()
+    generator = ProbeGenerator()
     probes = []
     
     for _ in range(50):
@@ -1349,7 +1349,7 @@ def load_safety_probes() -> List[Challenge]:
 
 def load_capability_probes() -> List[Challenge]:
     """Load capability-specific probes."""
-    generator = ChallengeGenerator()
+    generator = ProbeGenerator()
     probes = []
     
     for _ in range(50):

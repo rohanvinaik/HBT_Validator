@@ -1,0 +1,138 @@
+# HBT Standard Configuration
+# =========================
+# Recommended configuration for most production use cases.
+# Balances performance, accuracy, and resource usage.
+
+# Hyperdimensional Computing Settings
+hdc:
+  dimension: 16384            # Standard dimension for good accuracy
+  sparsity: 0.1              # 10% non-zero values
+  seed: 42                   # Reproducible results
+  use_circular_buffer: true  # Enable for efficiency
+  buffer_size: 1000          # Reasonable buffer size
+  error_correction: true     # Enable error correction
+  parity_bits: 64           # Error correction strength
+  real_valued: false        # Use binary vectors
+  similarity_metric: "hamming"  # Primary similarity measure
+
+# REV Executor Settings
+rev:
+  window_size: 6            # Good balance of coverage and memory
+  stride: 3                 # 50% overlap between windows  
+  max_memory_gb: 8.0        # Reasonable memory limit
+  use_gradient_checkpointing: true  # Memory optimization
+  use_mixed_precision: true # Speed optimization
+  segment_cache_size: 100   # Moderate caching
+  checkpoint_interval: 10   # Save progress regularly
+  offload_to_disk: false    # Keep in memory if possible
+  compression_level: 1      # Light compression
+
+# Challenge Generation
+challenges:
+  count: 256                # Paper standard
+  domains: 
+    - "general"            # General knowledge
+    - "reasoning"          # Logical reasoning
+    - "factual"           # Factual questions
+    - "safety"            # Safety evaluation
+    - "creative"          # Creative tasks
+  complexity_range: [1, 5] # Full complexity range
+  adaptive_selection: true # Use intelligent selection
+  perturbation_types:
+    - "semantic"          # Meaning-preserving changes
+    - "syntactic"         # Grammar/structure changes
+    - "adversarial"       # Adversarial examples
+  difficulty_progression: true  # Gradually increase difficulty
+
+# Verification Settings
+verification:
+  similarity_threshold: 0.95      # High accuracy requirement
+  confidence_threshold: 0.90      # High confidence requirement
+  cross_validation: true          # Enable cross-validation
+  bootstrap_samples: 100          # Statistical robustness
+  significance_level: 0.05        # Statistical significance
+  generate_proofs: true           # Generate ZK proofs
+  proof_security: 128             # Security parameter bits
+
+# API Settings
+api:
+  budget: 5.00               # Reasonable budget
+  max_calls: 500            # Allow sufficient calls
+  rate_limit: 10            # Moderate rate limiting
+  timeout: 30               # Standard timeout
+  retry_attempts: 3         # Standard retry policy
+  backoff_strategy: "exponential"  # Exponential backoff
+  cache_responses: true     # Enable response caching
+  cache_ttl: 3600          # Cache for 1 hour
+  batch_size: 5            # Efficient batching
+  cost_tracking: true      # Track API costs
+
+# Variance Analysis
+variance:
+  num_perturbations: 50     # Good statistical power
+  perturbation_strength: 0.2  # Moderate perturbation
+  build_causal_graph: true  # Enable causal discovery
+  causal_threshold: 0.3     # Causal relationship threshold
+  max_causal_depth: 3       # Limit causal chains
+  granger_causality: true   # Use Granger causality
+  transfer_entropy: true    # Use transfer entropy
+
+# Fingerprinting
+fingerprinting:
+  incremental_updates: true    # Support incremental updates
+  signature_compression: true  # Compress signatures
+  lineage_tracking: true      # Track signature lineage
+  temporal_analysis: true     # Analyze temporal changes
+  anomaly_detection: true     # Detect anomalous behavior
+
+# Performance Settings
+performance:
+  enable_parallel: true     # Use parallel processing
+  num_workers: 4           # Number of worker processes
+  memory_monitoring: true   # Monitor memory usage
+  profiling: false         # Disable profiling by default
+  optimization_level: 2     # Moderate optimization
+  jit_compilation: true     # Enable JIT compilation
+  
+# Cryptography Settings
+crypto:
+  hash_algorithm: "blake3"  # Fast, secure hashing
+  merkle_tree_arity: 4     # Quaternary Merkle trees
+  commitment_scheme: "pedersen"  # Pedersen commitments
+  zk_protocol: "schnorr"   # Schnorr proofs
+  signature_scheme: "ecdsa"  # ECDSA signatures
+
+# Logging Configuration
+logging:
+  level: "INFO"            # Informative logging
+  console_output: true     # Log to console
+  file_output: true        # Save to log file
+  log_file: "hbt.log"     # Log file name
+  progress_bars: true      # Show progress bars
+  detailed_timing: true    # Log timing information
+  memory_tracking: true    # Log memory usage
+
+# Output Settings
+output:
+  save_signatures: true         # Save behavioral signatures
+  save_variance_tensor: true    # Save variance analysis
+  save_causal_graph: true       # Save causal graphs
+  save_metadata: true           # Save execution metadata
+  compression: true             # Compress outputs
+  output_format: "pickle"       # Default format
+  backup_outputs: true          # Create backups
+  
+# Quality Assurance
+quality:
+  input_validation: true       # Validate all inputs
+  output_verification: true    # Verify outputs
+  statistical_tests: true     # Run statistical tests
+  consistency_checks: true    # Check internal consistency
+  reproducibility_tests: true # Ensure reproducibility
+
+# Experimental Features
+experimental:
+  adaptive_dimensions: false    # Dynamic dimension adjustment
+  online_learning: false      # Online signature updates
+  federated_verification: false  # Distributed verification
+  quantum_resistance: false    # Quantum-resistant crypto

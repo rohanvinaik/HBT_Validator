@@ -1,0 +1,81 @@
+# HBT Quick Configuration
+# =====================
+# Optimized for rapid prototyping and development testing.
+# Uses smaller dimensions and fewer challenges for faster execution.
+
+# Hyperdimensional Computing Settings
+hdc:
+  dimension: 4096              # Reduced dimension for speed
+  sparsity: 0.05              # Lower sparsity for faster operations
+  seed: 42                    # Reproducible results
+  use_circular_buffer: false   # Disable for simplicity
+  error_correction: false     # Disable for speed
+  real_valued: false          # Use binary vectors
+
+# REV Executor Settings  
+rev:
+  window_size: 4              # Smaller windows
+  stride: 2                   # Faster sliding
+  max_memory_gb: 4.0          # Lower memory limit
+  use_gradient_checkpointing: false
+  use_mixed_precision: true
+  segment_cache_size: 50      # Reduced cache
+
+# Challenge Generation
+challenges:
+  count: 64                   # Fewer challenges
+  domains: ["general", "reasoning"]  # Limited domains
+  complexity_range: [1, 3]   # Lower complexity
+  adaptive_selection: false  # Use random selection
+  perturbation_types: ["semantic", "syntactic"]  # Basic perturbations
+
+# Verification Settings
+verification:
+  similarity_threshold: 0.90  # Slightly relaxed
+  confidence_threshold: 0.80  # Lower confidence requirement
+  quick_analysis: true        # Skip detailed analysis
+  generate_proofs: false      # No ZK proofs
+
+# API Settings (for commercial model testing)
+api:
+  budget: 1.00               # Low budget limit
+  max_calls: 100             # Limit API calls
+  rate_limit: 5              # Conservative rate limiting
+  timeout: 15                # Shorter timeout
+  retry_attempts: 2          # Fewer retries
+  cache_responses: true      # Enable caching
+  batch_size: 3              # Small batches
+
+# Variance Analysis
+variance:
+  num_perturbations: 20      # Fewer perturbations
+  perturbation_strength: 0.1 # Weaker perturbations
+  build_causal_graph: false  # Skip causal analysis
+
+# Performance Settings
+performance:
+  enable_parallel: false     # Disable parallelization
+  num_workers: 1            # Single worker
+  memory_monitoring: false   # Disable monitoring
+  profiling: false          # No performance profiling
+
+# Logging
+logging:
+  level: "WARNING"          # Less verbose logging
+  console_output: true
+  file_output: false        # No log files
+  progress_bars: true       # Show progress
+
+# Output Settings  
+output:
+  save_signatures: false    # Don't save signatures
+  save_variance_tensor: false  # Don't save tensors
+  save_causal_graph: false  # Don't save graphs
+  compression: false        # No compression
+
+# Development Settings
+development:
+  debug_mode: false
+  validate_inputs: false    # Skip input validation for speed
+  strict_mode: false        # Allow minor errors
+  experimental_features: false

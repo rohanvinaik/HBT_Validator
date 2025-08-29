@@ -6,7 +6,7 @@ __version__ = "0.1.0"
 from core.hbt_constructor import HolographicBehavioralTwin, HBTConfig
 from core.hdc_encoder import HyperdimensionalEncoder, HDCConfig
 from core.variance_analyzer import VarianceAnalyzer, VarianceConfig
-from core.rev_executor import REVExecutor, SegmentConfig
+from core.rev_executor import REVExecutor
 from core.rev_executor_enhanced import (
     REVExecutor as REVExecutorEnhanced,
     REVConfig,
@@ -42,19 +42,22 @@ from utils.cryptography import (
 )
 from utils.api_wrappers import (
     ModelAPIFactory,
-    OpenAIWrapper,
-    AnthropicWrapper,
-    HuggingFaceWrapper,
-    LocalModelWrapper,
-    BatchAPIClient
+    OpenAIAPI,
+    AnthropicAPI,
+    LocalModelAPI,
+    BatchedAPIClient,
+    BaseModelAPI,
+    ModelResponse
 )
 
 # Verification
 from verification.fingerprint_matcher import (
     FingerprintMatcher,
     BehavioralFingerprint,
-    IncrementalFingerprint,
-    FingerprintConfig
+    FingerprintConfig,
+    VerificationResult,
+    ZKProof,
+    LineageTracker
 )
 from verification.structural_inference import (
     CausalGraphRecovery,
@@ -99,9 +102,8 @@ __all__ = [
     "VarianceAnalyzer",
     "VarianceConfig",
     "REVExecutor",
-    "REVExecutorEnhanced",
+    "REVExecutorEnhanced", 
     "REVConfig",
-    "SegmentConfig",
     "SegmentSignature",
     "MerkleNode",
     
@@ -132,17 +134,20 @@ __all__ = [
     
     # Utils - API
     "ModelAPIFactory",
-    "OpenAIWrapper",
-    "AnthropicWrapper",
-    "HuggingFaceWrapper",
-    "LocalModelWrapper",
-    "BatchAPIClient",
+    "OpenAIAPI", 
+    "AnthropicAPI",
+    "LocalModelAPI",
+    "BatchedAPIClient",
+    "BaseModelAPI",
+    "ModelResponse",
     
     # Verification
     "FingerprintMatcher",
-    "BehavioralFingerprint",
-    "IncrementalFingerprint",
+    "BehavioralFingerprint", 
     "FingerprintConfig",
+    "VerificationResult",
+    "ZKProof",
+    "LineageTracker",
     "CausalGraphRecovery",
     "StructuralSimilarity",
     "HierarchicalStructure",

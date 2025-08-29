@@ -1,0 +1,223 @@
+# HBT Research Configuration
+# =========================
+# Comprehensive configuration for research and thorough analysis.
+# Maximizes accuracy and completeness at the cost of computation time.
+
+# Hyperdimensional Computing Settings
+hdc:
+  dimension: 65536              # Very high dimension for maximum accuracy
+  sparsity: 0.15               # Higher sparsity for robustness
+  seed: 42                     # Reproducible results
+  use_circular_buffer: true    # Advanced buffering
+  buffer_size: 5000           # Large buffer for stability
+  error_correction: true       # Full error correction
+  parity_bits: 256            # Strong error correction
+  real_valued: false          # Binary for interpretability
+  similarity_metric: "hamming" # Primary metric
+  secondary_metrics: ["cosine", "jaccard", "euclidean"]  # Additional metrics
+  multi_scale_encoding: true   # Enable multi-scale analysis
+  ensemble_encoding: true     # Use ensemble of encoders
+
+# REV Executor Settings
+rev:
+  window_size: 12             # Large windows for comprehensive coverage
+  stride: 6                   # Significant overlap
+  max_memory_gb: 32.0         # High memory allowance
+  use_gradient_checkpointing: true
+  use_mixed_precision: true
+  segment_cache_size: 500     # Large cache
+  checkpoint_interval: 5      # Frequent checkpointing
+  offload_to_disk: true      # Use disk for very large models
+  compression_level: 3        # Aggressive compression
+  streaming_analysis: true    # Enable streaming for huge models
+  memory_mapping: true       # Use memory mapping
+  parallel_windows: true     # Process windows in parallel
+
+# Challenge Generation  
+challenges:
+  count: 512                  # Extensive challenge set
+  domains:
+    - "general"              # General knowledge
+    - "reasoning"            # Logical reasoning  
+    - "factual"             # Factual accuracy
+    - "safety"              # Safety evaluation
+    - "creative"            # Creative tasks
+    - "mathematical"        # Mathematical reasoning
+    - "scientific"          # Scientific knowledge
+    - "code"                # Programming tasks
+    - "multilingual"        # Multiple languages
+    - "ethical"             # Ethical reasoning
+  complexity_range: [1, 10]  # Extended complexity range
+  adaptive_selection: true   # Intelligent selection
+  perturbation_types:
+    - "semantic"            # Semantic preserving
+    - "syntactic"           # Syntactic changes
+    - "adversarial"         # Adversarial examples
+    - "paraphrasing"        # Paraphrasing attacks
+    - "backdoor"            # Backdoor detection
+    - "jailbreak"           # Jailbreak attempts
+  difficulty_progression: true
+  cross_lingual: true        # Test across languages
+  temporal_probing: true     # Test temporal reasoning
+
+# Verification Settings
+verification:
+  similarity_threshold: 0.99      # Very high accuracy
+  confidence_threshold: 0.95      # Very high confidence
+  cross_validation: true          # Full cross-validation
+  k_fold_cv: 10                  # 10-fold cross-validation
+  bootstrap_samples: 1000         # Extensive bootstrapping
+  significance_level: 0.01        # Strict significance
+  multiple_comparisons: true      # Bonferroni correction
+  generate_proofs: true           # Full ZK proof generation
+  proof_security: 256             # Maximum security
+  interactive_proofs: true        # Interactive protocols
+  proof_verification: true        # Verify all proofs
+
+# API Settings (for comprehensive commercial analysis)
+api:
+  budget: 25.00              # High budget for thorough testing
+  max_calls: 2000           # Allow extensive testing
+  rate_limit: 20            # Higher rate limit
+  timeout: 60               # Extended timeout
+  retry_attempts: 5         # Aggressive retry policy
+  backoff_strategy: "exponential"
+  cache_responses: true     # Comprehensive caching
+  cache_ttl: 86400         # Cache for 24 hours
+  batch_size: 10           # Large batches
+  cost_tracking: true      # Detailed cost analysis
+  cost_optimization: true   # Optimize API usage
+  multi_provider: true     # Test multiple providers
+
+# Variance Analysis
+variance:
+  num_perturbations: 200        # Extensive perturbation analysis
+  perturbation_strength: 0.3    # Strong perturbations
+  multi_scale_perturbations: true  # Multiple perturbation scales
+  build_causal_graph: true      # Full causal discovery
+  causal_threshold: 0.2         # Sensitive causal detection
+  max_causal_depth: 5          # Deep causal chains
+  granger_causality: true      # Granger causality
+  transfer_entropy: true       # Transfer entropy
+  mutual_information: true     # Mutual information
+  partial_correlation: true    # Partial correlation analysis
+  dynamic_causal_modeling: true  # Dynamic causal modeling
+  structural_equation_modeling: true  # SEM analysis
+
+# Advanced Fingerprinting
+fingerprinting:
+  incremental_updates: true      # Incremental fingerprinting
+  signature_compression: true    # Advanced compression
+  lineage_tracking: true        # Full lineage tracking
+  temporal_analysis: true       # Temporal fingerprinting
+  anomaly_detection: true       # Anomaly detection
+  drift_detection: true         # Behavioral drift detection
+  ensemble_fingerprints: true   # Multiple fingerprint types
+  hierarchical_fingerprints: true  # Multi-level fingerprints
+  adaptive_fingerprints: true   # Self-adapting fingerprints
+
+# Performance Settings
+performance:
+  enable_parallel: true         # Maximum parallelization
+  num_workers: 8               # Many workers
+  memory_monitoring: true      # Detailed memory monitoring
+  profiling: true              # Full performance profiling
+  optimization_level: 3        # Maximum optimization
+  jit_compilation: true        # JIT compilation
+  gpu_acceleration: true       # Use GPU if available
+  distributed_computing: true  # Distributed processing
+  cluster_computing: false     # Disable cluster by default
+
+# Advanced Cryptography
+crypto:
+  hash_algorithm: "blake3"       # Fast secure hashing
+  backup_hash: "sha3-256"       # Backup hash function
+  merkle_tree_arity: 8         # Large arity trees
+  commitment_scheme: "pedersen" # Pedersen commitments
+  backup_commitment: "sha256"   # Backup commitment
+  zk_protocol: "schnorr"       # Schnorr proofs
+  backup_zk: "bulletproofs"    # Backup ZK system
+  signature_scheme: "ecdsa"    # Digital signatures
+  key_size: 256               # Large key size
+  quantum_resistance: true     # Quantum-resistant options
+
+# Comprehensive Logging
+logging:
+  level: "DEBUG"              # Maximum verbosity
+  console_output: true        # Console logging
+  file_output: true          # File logging
+  structured_logging: true   # Structured log format
+  log_file: "hbt_research.log"  # Research log file
+  progress_bars: true        # Progress indication
+  detailed_timing: true      # Timing analysis
+  memory_tracking: true      # Memory profiling
+  performance_metrics: true  # Performance logging
+  statistical_logging: true  # Statistical summaries
+  distributed_logging: true  # Distributed log collection
+
+# Comprehensive Output
+output:
+  save_signatures: true           # All signatures
+  save_variance_tensor: true      # Full variance analysis
+  save_causal_graph: true         # Causal structures
+  save_metadata: true             # All metadata
+  save_intermediate_results: true # Intermediate outputs
+  save_statistical_tests: true   # Statistical test results
+  save_performance_metrics: true # Performance data
+  compression: true               # Compress everything
+  output_format: "hdf5"          # HDF5 for large datasets
+  backup_outputs: true           # Multiple backups
+  version_outputs: true          # Version all outputs
+  export_formats: ["json", "csv", "pickle", "matlab"]  # Multiple formats
+
+# Quality Assurance
+quality:
+  input_validation: true         # Comprehensive input validation
+  output_verification: true      # Full output verification
+  statistical_tests: true       # All statistical tests
+  consistency_checks: true      # Internal consistency
+  reproducibility_tests: true   # Reproducibility verification
+  stress_testing: true          # Stress test components
+  edge_case_testing: true       # Test edge cases
+  regression_testing: true      # Regression tests
+  integration_testing: true     # Integration tests
+  
+# Research Experiments
+experiments:
+  ablation_studies: true         # Automated ablation studies
+  sensitivity_analysis: true     # Parameter sensitivity
+  convergence_analysis: true     # Convergence testing
+  scaling_studies: true          # Scaling law discovery
+  comparison_studies: true       # Comparative analysis
+  benchmark_evaluation: true     # Standard benchmarks
+  novel_architectures: true      # Test new architectures
+
+# Advanced Features
+advanced:
+  adaptive_dimensions: true       # Dynamic dimension tuning
+  online_learning: true          # Online signature updates
+  federated_verification: true   # Distributed verification
+  quantum_resistance: true       # Quantum-resistant methods
+  homomorphic_operations: false  # Homomorphic encryption
+  differential_privacy: true     # Privacy-preserving analysis
+  interpretability_analysis: true # Interpretability features
+  uncertainty_quantification: true # Uncertainty estimation
+  meta_learning: false          # Meta-learning capabilities
+  
+# Resource Management
+resources:
+  max_cpu_percent: 90          # Use most CPU
+  max_memory_percent: 80       # Conservative memory usage
+  disk_space_gb: 100          # Significant disk usage allowed
+  network_bandwidth_mbps: 100  # High bandwidth allowance
+  gpu_memory_gb: 16           # GPU memory if available
+  
+# Data Management
+data:
+  dataset_caching: true        # Cache large datasets
+  incremental_processing: true # Process incrementally
+  data_validation: true       # Validate all data
+  data_versioning: true       # Version datasets
+  data_lineage: true          # Track data lineage
+  backup_frequency: "hourly"   # Frequent backups
+  cleanup_policy: "manual"    # Manual cleanup only
